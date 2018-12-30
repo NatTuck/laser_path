@@ -4,8 +4,8 @@ defmodule LaserPath.Path do
   alias LaserPath.Path
   alias XmlBuilder, as: X
 
-  def start do
-    %Path{cmds: []}
+  def start(x0 \\ 0, y0 \\ 0) do
+    %Path{cmds: [["M", x0, y0]]}
   end
 
   def push(%Path{cmds: cmds}, cc) do
@@ -34,7 +34,7 @@ defmodule LaserPath.Path do
     |> Enum.join(" ")
 
     X.element :path, %{
-      :d => "M 0 0 #{d} z",
+      :d => "#{d} z",
       :fill => "none",
       :stroke => "black",
       :'stroke-width' => 1,

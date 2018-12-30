@@ -47,10 +47,22 @@ defmodule LaserPath do
   > LaserPath.rotate(body, a, x, y)
   """
 
-  def rotate(body, a, x \\ 0, y \\ 0) when is_list(body) do
+  def rotate(body, a), do: rotate(body, a, 0, 0)
+
+  def rotate(body, a, x, y) when is_list(body) do
     X.element(:g, %{transform: "rotate(#{a} #{x} #{y})"}, body)
   end
 
-  def translate(body, a, x \\ 0, y \\ 0), do: rotate([body], a, x, y)
+  def rotate(body, a, x, y), do: rotate([body], a, x, y)
+
+  @doc """
+  Flip an element horizontally.
+
+  > LaserPath.mirror(body)
+  """
+
+  def mirror(body) do
+    X.element(:g, %{transform: "scale(-1 1)"}, body)
+  end
 end
 
