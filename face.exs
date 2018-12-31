@@ -19,6 +19,7 @@ defmodule Face do
       eye() |> LP.translate(-5, 0),
       eye() |> LP.mirror() |> LP.translate(5, 0),
       LP.Shapes.rect(8, 3) |> LP.translate(0, 10),
+      LP.Shapes.circle(20, stroke: "blue"),
     ]
   end
 end

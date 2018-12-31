@@ -27,17 +27,19 @@ defmodule LaserPath.Path do
     |> arc_to(-2 * r, 0, r, r, 1, sweep)
   end
 
-  def to_x(%Path{cmds: cmds}) do
+  def to_x(%Path{cmds: cmds}, attrs \\ %{}) do
     d = cmds
     |> Enum.reverse
     |> Enum.map(&(Enum.join(&1, " ")))
     |> Enum.join(" ")
 
-    X.element :path, %{
+    defaults = %{
       :d => "#{d} z",
       :fill => "none",
       :stroke => "black",
       :'stroke-width' => 1,
     }
+
+    X.element :path, Map.merge(defaults, Enum.into(attrs, %{}))
   end
 end
